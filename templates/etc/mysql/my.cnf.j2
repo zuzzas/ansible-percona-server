@@ -1,9 +1,9 @@
 # {{ ansible_managed }}
 
-{% for section in percona_server_etc_my_cnf %}
+{% for section, attributes in percona_server_etc_my_cnf.items() %}
 
 [{{ section }}]
-{% for name, value in item.items() %}
+{% for name, value in attributes.items() %}
 {% if value %}
 {{ name }} = {{ value }}
 {% else %}

@@ -5,39 +5,18 @@ role = File.basename(File.expand_path(File.dirname(__FILE__)))
 
 boxes = [
   {
-    :name => "ubuntu-1204",
-    :box => "bento/ubuntu-12.04",
-    :ip => '10.0.0.11',
-    :cpu => "50",
-    :ram => "256"
-  },
-  {
-    :name => "ubuntu-1404",
-    :box => "bento/ubuntu-14.04",
-    :ip => '10.0.0.12',
-    :cpu => "50",
-    :ram => "256"
-  },
-  {
     :name => "ubuntu-1604",
-    :box => "bento/ubuntu-16.04",
-    :ip => '10.0.0.13',
-    :cpu => "50",
-    :ram => "256"
+    :box => "ubuntu/xenial64",
+    :ip => '10.0.0.1',
+    :cpu => "70",
+    :ram => "1024"
   },
   {
-    :name => "debian-711",
-    :box => "bento/debian-7.11",
-    :ip => '10.0.0.14',
-    :cpu => "50",
-    :ram => "256"
-  },
-  {
-    :name => "debian-87",
-    :box => "bento/debian-8.7",
-    :ip => '10.0.0.15',
-    :cpu => "50",
-    :ram => "256"
+    :name => "debian-9",
+    :box => "debian/stretch64",
+    :ip => '10.0.0.2',
+    :cpu => "70",
+    :ram => "1024"
   },
 ]
 
@@ -55,7 +34,7 @@ Vagrant.configure("2") do |config|
       vms.vm.network :private_network, ip: box[:ip]
 
       vms.vm.provision :ansible do |ansible|
-        ansible.playbook = "tests/vagrant.yml"
+        ansible.playbook = "tests/test.yml"
         ansible.verbose = "vv"
       end
     end

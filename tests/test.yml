@@ -1,8 +1,8 @@
 # test file for percona-server
 ---
-- hosts: localhost
-  connection: local
-  become: true
+- hosts: all
+  gather_facts: False
+  become: True
   roles:
     - ../../
   vars:
@@ -42,3 +42,6 @@
       - database: mysql
         queries:
           - "INSERT IGNORE INTO user (Host, User, Password, ssl_type, ssl_cipher, x509_issuer, x509_subject) VALUES ('localhost', 'test', password('test'), '', '', '', '')"
+  pre_tasks:
+    - raw: test -e /usr/bin/python || (apt -y update && apt install -y python3 python-minimal)
+    - setup:
